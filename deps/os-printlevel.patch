@@ -1,0 +1,13 @@
+diff --git a/OS/src/OSUtils/OSParameters.h b/OS/src/OSUtils/OSParameters.h
+index d8af53f..6a469a4 100644
+--- a/OS/src/OSUtils/OSParameters.h
++++ b/OS/src/OSUtils/OSParameters.h
+@@ -115,7 +115,7 @@ enum ENUM_OUTPUT_LEVEL
+      ENUM_OUTPUT_LEVEL_NUMBER_OF_LEVELS    // insert other values above this one...
+ };
+ 
+-#define DEFAULT_OUTPUT_LEVEL ENUM_OUTPUT_LEVEL_error
++#define DEFAULT_OUTPUT_LEVEL -1
+ 
+ /**
+  *  Enumeration for the different areas that can produce output.

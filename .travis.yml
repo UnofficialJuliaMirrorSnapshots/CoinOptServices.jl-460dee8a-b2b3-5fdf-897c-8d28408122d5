@@ -1,0 +1,34 @@
+language: julia
+os:
+  - linux
+  - osx
+julia:
+  - 0.6
+  - nightly
+matrix:
+  allow_failures:
+    - julia: nightly
+notifications:
+  email: false
+sudo: false
+cache:
+  directories:
+  - $HOME/usr
+addons:
+  apt_packages:
+  - gfortran
+env:
+  - MAKEFLAGS="-j3"
+    LD_LIBRARY_PATH=$HOME/usr/lib
+# uncomment the following lines to override the default test script
+script:
+  - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
+  - julia -e 'Pkg.clone(pwd())'
+  - julia -e 'Pkg.build("CoinOptServices")' > stdout.log
+  - gem install gist
+  - gist stdout.log || echo empty
+  - julia -e 'Pkg.test("CoinOptServices")'
+before_cache:
+  - cp -R $HOME/.julia/*/Cbc/deps/usr $HOME
+  - cp -R $HOME/.julia/*/Ipopt/deps/usr $HOME
+  - cp -R $HOME/.julia/*/CoinOptServices/deps/usr $HOME
